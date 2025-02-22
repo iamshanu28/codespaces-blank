@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 def get_top_output():
     try:
-        return os.popen("top").read()
+        return os.popen("top -bn1 | head -20").read()
     except Exception as e:
         return str(e)
 
@@ -18,7 +18,7 @@ def home():
 @app.route('/htop')
 def htop():
     name = "Shanu Kumar"
-    username = os.getenv("USER") or os.getenv("iamshanu28") or "Unknown"
+    username = os.getenv("USER") 
     server_time = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S IST')
     top_output = get_top_output().replace("\n", "<br>")
 
